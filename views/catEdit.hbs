@@ -1,0 +1,68 @@
+<div class="container-fluid h-100 container-custom">
+    <div class="row vertical-nav h-100">
+        <div class="col-2 border-right border-white" id="side-bar">      
+            <div class="row ">
+                <ul class="nav flex-column sidebar-nav">
+                    <li class="nav-item p-2">
+                        <a href="/home" class="nav-link text-white">
+                            <i class="fa fa-home fa-lg" aria-hidden="true"></i>
+                            Trang Chủ
+                        </a>
+                    </li>
+                    <li class="nav-item dropdown p-2 sidebar-brand">
+                        <a href="#" class="nav-link text-white dropdown-toggle" data-toggle="dropdown" href="#"
+                            role="button" aria-haspopup="true" aria-expanded="false">
+                            <i class="fa fa-th-large fa-lg" aria-hidden="true"></i>
+                            Quản Lý Food
+                        </a>
+
+                        <ul class="dropdown-menu dropdown-menu-lg-right">
+                            <li class="nav-item">
+                                <a class="nav-link" href="/category">Loại Món</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/product/newProducts">Thêm Món</a>
+                            </li>
+                        </ul>
+
+                    </li>
+                </ul>
+            </div>
+
+            <div class="row logout">
+                <a class="signout text-white" name="signout" id="signout" href="/signOut">Đăng Xuất</a>
+            </div>
+        </div>
+
+        <div class="col myDataBase">
+            <h4 class="text-center m-3">Update Category</h4>
+
+            <div class="container">
+                <form action="/category/updateCat" method="POST" autocomplete="off">
+                    <input type="hidden" name="_id" value="{{Cat._id}}" />
+
+                    <input type="hidden" name="oldCat" value="{{Cat.catName}}" />
+                    
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label>Loại Món</label>
+                            <input class="form-control" name="catName" value="{{Cat.catName}}" />
+                        </div>
+                        <div class="form-group">
+                            <label class="col-form-label col-form-label-lg" for="catTextarea">Mô tả:</label>
+                            <textarea class="form-control" id="catTextarea" rows="3" name="catDes"
+                                value="{{Cat.Description}}">{{Cat.Description}}</textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-secondary"> <a href="/category">Cancel</a></button>
+
+                        <button type="submit" class="btn btn-primary">Cập nhật</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+
+    </div>
+</div>

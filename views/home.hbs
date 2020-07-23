@@ -1,0 +1,116 @@
+<div class="container-fluid h-100 container-custom">
+    <div class="row vertical-nav h-100">
+        <div class="col-2 border-right border-white" id="side-bar">
+            <div class="row ">
+                <ul class="nav flex-column sidebar-nav">
+                    <li class="nav-item p-2">
+                        <a href="/home" class="nav-link text-white">
+                            <i class="fa fa-home fa-lg active" aria-hidden="true"></i>
+                            Trang Chủ
+                        </a>
+                    </li>
+                    <li class="nav-item dropdown p-2 sidebar-brand">
+                        <a href="#" class="nav-link text-white dropdown-toggle" data-toggle="dropdown" href="#"
+                            role="button" aria-haspopup="true" aria-expanded="false">
+                            <i class="fa fa-th-large fa-lg" aria-hidden="true"></i>
+                            Quản Lý Food
+                        </a>
+
+                        <ul class="dropdown-menu dropdown-menu-lg-right">
+                            <li class="nav-item">
+                                <a class="nav-link" href="/category">Loại Món</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/product/newProducts">Thêm Món</a>
+                            </li>
+                        </ul>
+
+                    </li>
+                </ul>
+            </div>
+
+            <div class="row logout">
+                <a class="signout text-white" name="signout" id="signout" href="/signOut">Đăng Xuất</a>
+            </div>
+        </div>
+
+        <div class="col myDataBase">
+            <h4 class="text-center m-3">Quản Lý Food</h4>
+            <div class="row m-2 shadow-lg p-3 mb-5 bg-white rounded">
+                <div class="col">
+                    {{#if createMessage}}
+                    <div class="alert alert-warning alert-dismissible fade show">
+                        <strong>{{createMessage}}</strong>
+                    </div>
+                    {{/if}}
+                    {{#if updateMessage}}
+                    <div class="alert alert-warning alert-dismissible fade show">
+                        <strong>{{updateMessage}}</strong>
+                    </div>
+                    {{/if}}
+                    {{#if deleteMessage}}
+                    <div class="alert alert-warning alert-dismissible fade show">
+                        <strong>{{deleteMessage}}</strong>
+                    </div>
+                    {{/if}}
+                    <table class="table display compact table-bordered hover" id="mydatatable">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th class="text-center text-white showImage">Ảnh</th>
+                                <th class="text-center text-white showTenSp">Tên </th>
+                                <th class="text-center text-white showGia">Gía </th>
+                                <th class="text-center text-white showNgay">Ngày </th>
+                                <th class="text-center text-white showMoTa">Mô Tả</th>
+                                <th class="text-center text-white showLoaiSp">Loại </th>
+                                <th class="text-center text-white showQuanLy">Quản Lý</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {{#each productData}}
+                            <tr>
+                                <td class="text-center showImage">
+                                    <img class="img-thumbnail img-preview "
+                                        src="http://localhost:3000/upload/{{Images}}" title="Hình ảnh" width="100"
+                                        height="100">
+                                </td>
+                                
+                                <td class="text-center showTenSp">
+                                    <p class="data text-center p-1 pt-2">{{TenSp}}</p>
+                                </td>
+                                <td class="text-center showGia">
+                                    <p class="data text-center p-1 pt-2">{{GiaSp}}</p>
+                                </td>
+                                <td class="text-center showNgay">
+                                    <p class="data text-center p-1 pt-2">{{NgayThemSp}}</p>
+                                </td>
+                                
+                                <td class="text-center showMoTa">
+                                    <p class="data text-center p-1 pt-2">{{MoTaSp}}</p>
+                                </td>
+                                <td class="text-center showLoaiSp">
+                                    <p class="data text-center p-1 pt-2">{{LoaiSp}}</p>
+                                </td>
+                                
+                                <td class="text-center p-1 pt-2">
+                                    <a href="/product/updateProduct/{{_id}}" class="btn btn-primary btn-sm">Update</a>
+                                    <a href="/product/deleteProduct/{{_id}}"
+                                        onclick="return confirm('Bạn có chắc chắn muốn xoá?')" class="btn btn-danger btn-sm">Delete</a>
+                                </td>
+                            </tr>
+                            {{/each}}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
+<script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#mydatatable').DataTable();
+    });
+</script>

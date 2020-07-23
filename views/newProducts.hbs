@@ -1,0 +1,134 @@
+<div class="container-fluid h-100 container-custom">
+    <div class="row vertical-nav h-100">
+        <div class="col-2 border-right border-white" id="side-bar">
+            <div class="row ">
+                <ul class="nav flex-column sidebar-nav">
+                    <li class="nav-item p-2">
+                        <a href="/home" class="nav-link text-white">
+                            <i class="fa fa-home fa-lg" aria-hidden="true"></i>
+                            Trang Chủ
+                        </a>
+                    </li>
+                    <li class="nav-item dropdown p-2 sidebar-brand">
+                        <a href="#" class="nav-link text-white dropdown-toggle" data-toggle="dropdown" href="#"
+                            role="button" aria-haspopup="true" aria-expanded="false">
+                            <i class="fa fa-th-large fa-lg" aria-hidden="true"></i>
+                           Quản Lý Food
+                        </a>
+
+                        <ul class="dropdown-menu dropdown-menu-lg-right">
+                            <li class="nav-item">
+                                <a class="nav-link" href="/category">Loại Món</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/product/newProducts">Thêm Món</a>
+                            </li>
+                        </ul>
+
+                    </li>
+                </ul>
+            </div>
+
+            <div class="row logout">
+                <a class="signout text-white" name="signout" id="signout" href="/signOut">Đăng Xuất</a>
+            </div>
+        </div>
+
+        <div class="col myDataBase">
+            <h4 class="text-center m-3">Thêm Món</h4>
+
+            <form action="/product/createProduct" method="POST" enctype="multipart/form-data">
+                <div class="modal-body">
+
+                     <div class="form-group">
+                    <label  > Loại Món</label>
+                    <select name="loaiSp" class="form-control ">
+                        {{#each catList}}
+                        <option class="text-dark">{{catName}}</option>
+                        {{/each}}
+                    </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Tên Món</label>
+                        <input class="form-control" name="tenSp" required/>
+                        
+                    </div>
+                   
+                    <div class="form-group">
+                        <label>Gía Món</label>
+                        <input class="form-control" name="giaSp" required/>
+                       
+                    </div>
+                    <div class="form-group">
+                        <label>Ngày Thêm Món</label>
+                        <input class="form-control" name="ngayThemSp" required/>
+                        
+                    </div>
+                    <div class="form-group">
+                        <label>Mô Tả</label>
+                        <textarea class="form-control" name="moTaSp" rows="5" required></textarea>
+                       
+                    </div>
+                    <div class="row">
+                        <div class="col-8" style="width:100px; height:100px">
+                            <img class="img-thumbnail img-preview " id="img-preview" src="http://placehold.it/200"
+                                title="Hình ảnh" width="150" height="150">
+                        </div>
+                        <div class="col-4">
+                            <label>Tải lên tệp ảnh:</label>
+                            <input type="file" name="image" style="width: 100px" id="image" />
+                         
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    window.onload = function () {
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    document.querySelector('.img-preview').setAttribute('src', e.target.result);
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        var imageInput = document.querySelector('#image');
+        imageInput.onchange = changeEventHandler;
+
+        function changeEventHandler(event) {
+            readURL(this);
+        }
+    };
+
+    (function () {
+        'use strict';
+        window.addEventListener('load', function () {
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.getElementsByClassName('needs-validation');
+            // Loop over them and prevent submission
+            var validation = Array.prototype.filter.call(forms, function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        }, false);
+    })();
+
+</script>

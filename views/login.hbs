@@ -1,0 +1,104 @@
+{{!-- <!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login Page</title>
+
+  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+  <!-- My Style -->
+  <link href="/css/LoginStyle.css" rel="stylesheet" type="text/css" />
+  
+</head>
+
+<body> --}}
+
+{{!-- <div class="container-custom">
+  <div class="container-login">
+
+    <div class="wrap-login">
+
+      <form action="/loginProcess" method="POST" class="login-form validate-form">
+
+        {{#if message}}
+        <div class="alert alert-warning alert-dismissible fade show">
+          <strong>{{message}}</strong>
+        </div>
+        {{/if}}
+
+        <span class="login-form-title">
+          ADMIN LOGIN
+        </span>
+
+        <div class="wrap-input rs1">
+          <input class="input" class="form-control" type="text" name="email">
+          <label class="label-input">EMAIL</label>
+        </div>
+
+        <div class="wrap-input rs2">
+          <input class="input" class="form-control" type="password" name="password">
+          <span class="label-input">PASSWORD</span>
+        </div>
+
+        <div class="container-login-form-btn">
+          <button type="submit" class="login-form-btn">
+            Sign in
+          </button>
+        </div>
+
+        <div class="container-txt">
+          <a href="#" class="txt1">
+            Forgot password?
+          </a>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+<script>
+  $(document).ready(function () {
+    var $input = $('.input');
+    $input.focusout(function () {
+      if ($(this).val().length > 0) {
+        $(this).addClass('input-focus');
+        $(this).next('.label-input').addClass('label-focus');
+      } else {
+        $(this).removeClass('input-focus');
+        $(this).next('.label-input').removeClass('label-focus');
+      }
+    });
+  });
+
+</script> --}}
+{{!-- 
+</body>
+
+</html> --}}
+
+
+ <div class="container">
+        <div class="card card-container">
+            <!-- <img class="profile-img-card" src="//lh3.googleusercontent.com/-6V8xOA6M7BA/AAAAAAAAAAI/AAAAAAAAAAA/rzlHcD0KYwo/photo.jpg?sz=120" alt="" /> -->
+            <img id="profile-img" class="profile-img-card" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" />
+            <p id="profile-name" class="profile-name-card"></p>
+            <form action="/loginProcess" method="POST" class="form-signin">
+                <span id="reauth-email" class="reauth-email"></span>
+                <input type="email" name="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+                <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required>
+                <div id="remember" class="checkbox">
+                    <label>
+                        <input type="checkbox" value="remember-me"> Remember me
+                    </label>
+                </div>
+                <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit">Sign in</button>
+            </form><!-- /form -->
+            <a href="#" class="forgot-password">
+                Forgot the password?
+            </a>
+        </div><!-- /card-container -->
+    </div><!-- /container -->

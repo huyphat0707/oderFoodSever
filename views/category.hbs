@@ -1,0 +1,170 @@
+<div class="container-fluid h-100 container-custom">
+    <div class="row vertical-nav h-100">
+        <div class="col-2 border-right border-white" id="side-bar">
+            <div class="row ">
+                <ul class="nav flex-column sidebar-nav">
+                    <li class="nav-item p-2">
+                        <a href="/home" class="nav-link text-white">
+                            <i class="fa fa-home fa-lg" aria-hidden="true"></i>
+                            Trang Chủ
+                        </a>
+                    </li>
+                    <li class="nav-item dropdown p-2 sidebar-brand">
+                        <a href="#" class="nav-link text-white dropdown-toggle" data-toggle="dropdown" href="#"
+                            role="button" aria-haspopup="true" aria-expanded="false">
+                            <i class="fa fa-th-large fa-lg" aria-hidden="true"></i>
+                            Quản Lý Food
+                        </a>
+
+                        <ul class="dropdown-menu dropdown-menu-lg-right">
+                            <li class="nav-item">
+                                <a class="nav-link" href="/category">Loại Món</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/product/newProducts">Thêm Món</a>
+                            </li>
+                        </ul>
+
+                    </li>
+                </ul>
+            </div>
+
+            <div class="row logout">
+                <a class="signout text-white" name="signout" id="signout" href="/signOut">Đăng Xuất</a>
+            </div>
+        </div>
+
+        <div class="col myDataBase">
+
+
+            <h4 class="text-center m-3">Category</h4>
+            <div style="margin-left: 50px;">
+              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"
+                data-whatever="@mdo" ><i class="fas fa-plus-circle"></i></button>
+            </div>
+          
+            
+            <div class="row container-cat h-100 w-100">
+                <div class="container-cat-left col-10 ml-5 mt-2 shadow-lg p-3 bg-white rounded">
+                    {{#if updateMessage}}
+                    <div class="alert alert-warning alert-dismissible fade show">
+                        <strong>{{updateMessage}}</strong>
+                    </div>
+                    {{/if}}
+
+                    <table class="table table-bordered hover h-100" id="mydatatable">
+                        <thead class="thead-dark">
+                            <tr>
+                                <td class="text-center w-25">Loại Món</td>
+                                <td class="text-center w-50">Mô Tả</td>
+                                <td class="text-center w-25">Quản Lý</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {{#each catData}}
+                            <tr>
+                                <td>
+                                    <p class="data text-center p-1 pt-2">{{catName}}</p>
+                                </td>
+                                <td>
+                                    <p class="data text-center p-1 pt-2">{{Description}}</p>
+                                </td>
+                                <td class="text-center p-1 pt-2">
+                                    <a href="/category/updateCat/{{_id}}" role="button"
+                                        class="btn btn-primary">Update</a>
+                                    <a href="/category/deleteCat/{{catName}}" role="button"
+                                        class="btn btn-danger btn-sm"
+                                        onclick="return confirm('Xoá loại món ăn sẽ xoá tất cả món thuộc loại món ăn này. Bạn có chắc chắn muốn xoá?')">Delete</a>
+                                </td>
+                            </tr>
+                            {{/each}}
+                        </tbody>
+                    </table>
+
+                </div>
+
+                <div class="">
+                    {{!-- container-cat-right col-5 mr-4 mt-2 shadow-lg p-3 mb-5 bg-white rounded --}}
+                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                        aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Thêm Loại Món</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <form action="/category/createCat" method="POST" id="addForm"
+                                        class="needs-validation" novalidate>
+
+                                        <div class="form-group">
+                                            <label class="col-form-label col-form-label-lg" for="inputLarge">Loại Món:</label>
+                                            <input class="form-control form-control-lg" type="text" placeholder=""
+                                                id="inputLarge" name="catName" required>
+                                          
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-form-label col-form-label-lg" for="inputLarge">Mô
+                                                tả:</label>
+                                            <textarea class="form-control" id="catTextarea" rows="3"
+                                                name="catDes"></textarea>
+                                        </div>
+                                        {{!-- <button type="submit" class="btn btn-primary">Thêm Mới</button> --}}
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary"
+                                                data-dismiss="modal">Close</button>
+                                            <button type="submit" class="btn btn-primary">Thêm Mới</button>
+                                        </div>
+                                    </form>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+<script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
+<script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#mydatatable').DataTable();
+    });
+
+    (function () {
+        'use strict';
+        window.addEventListener('load', function () {
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.getElementsByClassName('needs-validation');
+            // Loop over them and prevent submission
+            var validation = Array.prototype.filter.call(forms, function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        }, false);
+    })();
+
+
+    $('#exampleModal').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget) // Button that triggered the modal
+        var recipient = button.data('whatever') // Extract info from data-* attributes
+        // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+        // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+        var modal = $(this)
+        modal.find('.modal-title').text('New message to ' + recipient)
+        modal.find('.modal-body input').val(recipient)
+    })
+</script>
